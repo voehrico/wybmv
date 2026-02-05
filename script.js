@@ -300,8 +300,8 @@ function showFinal() {
       <p class="game-text">Okay.<br><br>Du hast alles gesammelt:<br>Ein Herz.<br>Blumen.<br>Schokolade.<br><br>Es fehlt nur noch eins…</p>
       <h3>Will you be my Valentine?</h3>
       <div class="valentine-buttons" style="position:relative;height:120px;min-width:320px;">
-        <button class="valentine-btn yes" id="yes-btn">YES 💖</button>
-        <button class="valentine-btn no" id="no-btn" style="left:0;top:0;">NO 💔</button>
+        <button class="valentine-btn yes" id="yes-btn">Ja</button>
+        <button class="valentine-btn no" id="no-btn" style="left:0;top:0;">Nein</button>
       </div>
       <div id="no-feedback" style="margin-top:1.5em;font-size:1.1em;color:#b23a48;"></div>
     </div>
@@ -313,17 +313,10 @@ function setupValentineButtons() {
   const yesBtn = document.getElementById('yes-btn');
   const noBtn = document.getElementById('no-btn');
   const feedback = document.getElementById('no-feedback');
-  let noTexts = [
-    "Nice try 😜",
-    "Nein ist heute leider ausverkauft",
-    "Unreachable",
-    "Haha nope"
-  ];
   let failTexts = [
     "Ich glaube…<br>wir wissen beide, wie das endet 😅"
   ];
   let tries = 0;
-  let lastNoText = '';
   // NO-Button: Physisches Ausweichen über den ganzen Bildschirm
   noBtn.style.position = 'fixed';
   let bw = noBtn.offsetWidth;
@@ -335,9 +328,7 @@ function setupValentineButtons() {
   let ny = winH / 2 - bh / 2;
   noBtn.style.left = nx + 'px';
   noBtn.style.top = ny + 'px';
-  let lastTextSwitch = 0;
   function moveNoBtnAway(mx, my) {
-    let now = Date.now();
     // Button-Mitte
     let rect = noBtn.getBoundingClientRect();
     let bx = rect.left + bw/2;
@@ -357,17 +348,11 @@ function setupValentineButtons() {
       newY = Math.max(0, Math.min(winH - bh, newY - bh/2));
       noBtn.style.left = newX + 'px';
       noBtn.style.top = newY + 'px';
-      // Text wechseln (max. 1x pro Sekunde)
-      if (now - lastTextSwitch > 1000) {
-        let t;
-        do { t = rand(noTexts); } while (t === lastNoText);
-        lastNoText = t;
-        noBtn.textContent = t;
-        lastTextSwitch = now;
-        tries++;
-        state.noTries = tries;
-        if (tries > 4) feedback.innerHTML = failTexts[0];
-      }
+      // Text bleibt immer 'Nein'
+      noBtn.textContent = 'Nein';
+      tries++;
+      state.noTries = tries;
+      if (tries > 4) feedback.innerHTML = failTexts[0];
     }
   }
   // Über das ganze Fenster reagieren
