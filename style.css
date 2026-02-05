@@ -1,0 +1,194 @@
+/*
+  Mission Valentine - style.css
+  Soft, romantic, playful theme
+*/
+
+:root {
+  --pink: #ffd1dc;
+  --red: #ff6f91;
+  --cream: #fff6f0;
+  --accent: #f7b2b7;
+  --text: #a23e48;
+  --button: #ffb3c6;
+  --button-hover: #ff6f91;
+  --heart: #ff6f91;
+  --flower: #f7b2b7;
+  --choco: #a23e48;
+  --shadow: 0 4px 24px 0 rgba(255, 111, 145, 0.12);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--pink) 100%);
+  font-family: 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
+  color: var(--text);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#game-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  margin: 0.5em 0 0.2em 0;
+  text-align: center;
+}
+
+p, .game-text {
+  font-size: 1.25em;
+  margin: 0.5em 0 1em 0;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.button {
+  background: var(--button);
+  color: var(--text);
+  border: none;
+  border-radius: 2em;
+  padding: 1em 2.5em;
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 1.5em auto 0 auto;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+  display: block;
+}
+.button:hover, .button:focus {
+  background: var(--button-hover);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.heart {
+  font-size: 3em;
+  position: absolute;
+  transition: top 0.3s cubic-bezier(.68,-0.55,.27,1.55), left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+  cursor: pointer;
+  user-select: none;
+}
+
+.flower {
+  font-size: 2.5em;
+  position: absolute;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.3s;
+  user-select: none;
+}
+
+.flower.wrong {
+  opacity: 0.5;
+  transform: scale(0.7) rotate(-20deg);
+  pointer-events: none;
+}
+
+.flower.correct {
+  animation: flower-pop 0.4s;
+}
+
+@keyframes flower-pop {
+  0% { transform: scale(1); }
+  60% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.choco-heart {
+  font-size: 2.5em;
+  position: absolute;
+  cursor: pointer;
+  transition: opacity 0.7s, transform 0.2s;
+  user-select: none;
+}
+
+.choco-heart.fading {
+  opacity: 0.2;
+  pointer-events: none;
+  transform: scale(0.7) rotate(10deg);
+}
+
+.valentine-final {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.valentine-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  margin-top: 2em;
+}
+
+.valentine-btn {
+  background: var(--button);
+  color: var(--text);
+  border: none;
+  border-radius: 2em;
+  padding: 1em 2.5em;
+  font-size: 1.3em;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s, left 0.2s, top 0.2s;
+  position: relative;
+  min-width: 120px;
+}
+.valentine-btn:hover, .valentine-btn:focus {
+  background: var(--button-hover);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.valentine-btn.no {
+  background: #ffe0e9;
+  color: #b23a48;
+  position: absolute;
+  z-index: 2;
+}
+
+.heart-rain {
+  pointer-events: none;
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.heart-rain .rain-heart {
+  position: absolute;
+  font-size: 2.2em;
+  opacity: 0.85;
+  animation: heart-fall 2.5s linear forwards;
+}
+
+@keyframes heart-fall {
+  0% { transform: translateY(-10vh) scale(1); opacity: 0.7; }
+  80% { opacity: 1; }
+  100% { transform: translateY(110vh) scale(1.2); opacity: 0; }
+}
+
+@media (max-width: 600px) {
+  h1, h2, h3 { font-size: 1.3em; }
+  .button, .valentine-btn { font-size: 1em; padding: 0.8em 1.5em; }
+  .heart, .flower, .choco-heart { font-size: 2em; }
+}
