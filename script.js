@@ -456,15 +456,25 @@ const EMAILJS_TEMPLATE_ID = 'template_3nxs3xb'; // z.B. template_xxxxx
 const MAIL_TO_ME = 'colin.voehringer@gmx.de'; // <-- Eigene Adresse
 const MAIL_TO_HER = 'IHRE-MAIL@EXAMPLE.COM'; // <-- Ihre Adresse
 
-// EmailJS initialisieren (nur 1x nötig)
-function initEmailJS() {
-  if (typeof emailjs !== 'undefined') {
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+// EmailJS initialisieren (robust, wartet bis SDK geladen ist)
+function waitForEmailJSInit(cb) {
+  let tries = 0;
+  function tryInit() {
+    if (typeof window.emailjs !== 'undefined') {
+      window.emailjs.init(EMAILJS_PUBLIC_KEY);
+      cb();
+    } else if (tries < 50) { // max. 5 Sekunden warten
+      tries++;
+      setTimeout(tryInit, 100);
+    } else {
+      // Fallback: trotzdem starten, aber Warnung
+      cb();
+    }
   }
+  tryInit();
 }
 
 // ──────────────── INIT ────────────────
 document.addEventListener('DOMContentLoaded', function() {
-  initEmailJS();
-  startGame();
+  waitForEmailJSInit(startGame);
 });
