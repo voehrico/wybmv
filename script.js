@@ -452,7 +452,7 @@ function showFinalTextWithMail() {
 // Trage hier deine EmailJS-Daten ein:
 const EMAILJS_PUBLIC_KEY = '4kRASkzAJCK2OXw3g'; // z.B. public_xxxxxxxxxxxxxxxxx
 const EMAILJS_SERVICE_ID = 'service_aeh0nh6'; // z.B. service_xxxxx
-const EMAILJS_TEMPLATE_ID = 'template_3nxs3xb'; // z.B. template_xxxxx
+const EMAILJS_TEMPLATE_ID = 'template_l4n2hcg'; // z.B. template_xxxxx
 const MAIL_TO_ME = 'colin.voehringer@gmx.de'; // <-- Eigene Adresse
 const MAIL_TO_HER = 'IHRE-MAIL@EXAMPLE.COM'; // <-- Ihre Adresse
 
